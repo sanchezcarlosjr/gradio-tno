@@ -49,6 +49,7 @@ from gradio.components.textbox import Textbox
 from gradio.components.timeseries import Timeseries
 from gradio.components.upload_button import UploadButton
 from gradio.components.video import Video
+from gradio.components.tnoshape import TNOShape
 
 Text = Textbox
 DataFrame = Dataframe
@@ -119,4 +120,5 @@ __all__ = [
     "StatusTracker",
     "UploadButton",
     "Video",
+    "TNOShape"
 ]

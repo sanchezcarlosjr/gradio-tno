@@ -595,4 +595,5 @@ COMPONENT_MAPPING: dict[str, type] = {
     "markdown": StringSerializable,
     "code": StringSerializable,
     "annotatedimage": JSONSerializable,
+    "tnoshape":  JSONSerializable,
 }

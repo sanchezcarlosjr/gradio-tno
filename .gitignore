@@ -76,3 +76,6 @@ js/storybook/theme.css
 .config/playwright
 !.config/playwright/index.html
 !.config/playwright/index.ts
+
+
+**/.ipynb_checkpoints/**

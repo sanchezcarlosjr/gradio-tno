@@ -373,7 +373,7 @@ colorpicker: () => import("./ColorPicker"),
 
 ### 2.1 为 Svelte 组件编写单元测试
 
-在开发新组件时，您还应该为其编写一套单元测试。测试应该放置在新组件的文件夹中，文件名为 MyAwesomeComponent.test.ts。同样，像上面那样参考其他组件的测试（例如[Textbox.test.ts](https://github.com/gradio-app/gradio/blob/main/js/app/src/components/Textbox/Textbox.test.ts)），并添加尽可能多的单元测试，以测试新组件的不同方面和功能。
+在开发新组件时，您还应该为其编写一套单元测试。测试应该放置在新组件的文件夹中，文件名为 MyAwesomeComponent.test.ts。同样，像上面那样参考其他组件的测试（例如[TNOShape.test.ts](https://github.com/gradio-app/gradio/blob/main/js/app/src/components/Textbox/Textbox.test.ts)），并添加尽可能多的单元测试，以测试新组件的不同方面和功能。
 
 ### 3. 创建新的演示
 

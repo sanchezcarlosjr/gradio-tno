@@ -138,5 +138,9 @@ export const component_map = {
 	video: {
 		static: () => import("@gradio/video/static"),
 		interactive: () => import("@gradio/video/interactive")
+	},
+	tnoshape: {
+		static: () => import("../../../tnoshape/static"),
+		interactive: () => import("../../../tnoshape/static")
 	}
 };

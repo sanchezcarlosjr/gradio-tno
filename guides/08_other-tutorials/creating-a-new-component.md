@@ -371,7 +371,7 @@ colorpicker: () => import("./ColorPicker"),
 
 ### 2.1 Writing Unit Test for Svelte Component
 
-When developing new components, you should also write a suite of unit tests for it. The tests should be placed in the new component's folder in a file named MyAwesomeComponent.test.ts. Again, as above, take a cue from the tests of other components (e.g. [Textbox.test.ts](https://github.com/gradio-app/gradio/blob/main/js/app/src/components/Textbox/Textbox.test.ts)) and add as many unit tests as you think are appropriate to test all the different aspects and functionalities of the new component.
+When developing new components, you should also write a suite of unit tests for it. The tests should be placed in the new component's folder in a file named MyAwesomeComponent.test.ts. Again, as above, take a cue from the tests of other components (e.g. [TNOShape.test.ts](https://github.com/gradio-app/gradio/blob/main/js/app/src/components/Textbox/Textbox.test.ts)) and add as many unit tests as you think are appropriate to test all the different aspects and functionalities of the new component.
 
 ### 3. Create a New Demo
 

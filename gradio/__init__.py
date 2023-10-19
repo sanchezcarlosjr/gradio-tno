@@ -57,6 +57,7 @@ from gradio.components import (
     Timeseries,
     UploadButton,
     Variable,
+    TNOShape,
     Video,
     component,
 )
