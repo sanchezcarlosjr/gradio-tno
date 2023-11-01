@@ -51,7 +51,7 @@ class TestGettingComponents:
         ],
     )
     def test_get_component_instance_rendering(
-        self, component, render, unrender, should_be_rendered
+            self, component, render, unrender, should_be_rendered
     ):
         with gr.Blocks():
             textbox = gr.components.get_component_instance(
@@ -62,10 +62,40 @@ class TestGettingComponents:
 
 def test_raise_warnings():
     for c_type, component in zip(
-        ["inputs", "outputs"], [gr.inputs.Textbox, gr.outputs.Label]
+            ["inputs", "outputs"], [gr.inputs.Textbox, gr.outputs.Label]
     ):
         with pytest.warns(UserWarning, match=f"Usage of gradio.{c_type}"):
             component()
+
+
+class TestTnoShape:
+    def test_config(self):
+        text_input = gr.TNOShape()
+        assert text_input.get_config() == {
+            "lines": 1,
+            "max_lines": 20,
+            "placeholder": None,
+            "value": "",
+            "name": "tnoshape",
+            "show_copy_button": False,
+            "show_label": True,
+            "type": "text",
+            "label": None,
+            "container": True,
+            "min_width": 160,
+            "scale": None,
+            "elem_id": None,
+            "elem_classes": None,
+            "visible": True,
+            "interactive": None,
+            "root_url": None,
+            "rtl": False,
+            "text_align": None,
+            "autofocus": False,
+            "selectable": False,
+            "info": None,
+            "autoscroll": True,
+        }
 
 
 class TestTextbox:
@@ -198,7 +228,7 @@ class TestTextbox:
 
     def test_faulty_type(self):
         with pytest.raises(
-            ValueError, match='`type` must be one of "text", "password", or "email".'
+                ValueError, match='`type` must be one of "text", "password", or "email".'
         ):
             gr.Textbox(type="boo")
 
@@ -323,10 +353,10 @@ class TestNumber:
         """
         Interface, process, interpret
         """
-        iface = gr.Interface(lambda x: x**2, "number", "textbox")
+        iface = gr.Interface(lambda x: x ** 2, "number", "textbox")
         assert iface(2) == "4.0"
         iface = gr.Interface(
-            lambda x: x**2, "number", "number", interpretation="default"
+            lambda x: x ** 2, "number", "number", interpretation="default"
         )
         scores = (await iface.interpret([2]))[0]["interpretation"]
         assert scores == [
@@ -344,10 +374,10 @@ class TestNumber:
         """
         Interface, process, interpret
         """
-        iface = gr.Interface(lambda x: x**2, gr.Number(precision=0), "textbox")
+        iface = gr.Interface(lambda x: x ** 2, gr.Number(precision=0), "textbox")
         assert iface(2) == "4"
         iface = gr.Interface(
-            lambda x: x**2, "number", gr.Number(precision=0), interpretation="default"
+            lambda x: x ** 2, "number", gr.Number(precision=0), interpretation="default"
         )
         # Output gets rounded to 4 for all input so no change
         scores = (await iface.interpret([2]))[0]["interpretation"]
@@ -369,7 +399,7 @@ class TestNumber:
         iface = gr.Interface(lambda x: int(x) ** 2, "textbox", "number")
         assert iface(2) == 4.0
         iface = gr.Interface(
-            lambda x: x**2, "number", "number", interpretation="default"
+            lambda x: x ** 2, "number", "number", interpretation="default"
         )
         scores = (await iface.interpret([2]))[0]["interpretation"]
         assert scores == [
@@ -429,10 +459,10 @@ class TestSlider:
         """ "
         Interface, process, interpret
         """
-        iface = gr.Interface(lambda x: x**2, "slider", "textbox")
+        iface = gr.Interface(lambda x: x ** 2, "slider", "textbox")
         assert iface(2) == "4"
         iface = gr.Interface(
-            lambda x: x**2, "slider", "number", interpretation="default"
+            lambda x: x ** 2, "slider", "number", interpretation="default"
         )
         scores = (await iface.interpret([2]))[0]["interpretation"]
         assert scores == [
@@ -1147,7 +1177,7 @@ class TestFile:
 
     def test_file_type_must_be_list(self):
         with pytest.raises(
-            ValueError, match="Parameter file_types must be a list. Received str"
+                ValueError, match="Parameter file_types must be a list. Received str"
         ):
             gr.File(file_types=".json")
 
@@ -1194,7 +1224,7 @@ class TestUploadButton:
 
     def test_raises_if_file_types_is_not_list(self):
         with pytest.raises(
-            ValueError, match="Parameter file_types must be a list. Received int"
+                ValueError, match="Parameter file_types must be a list. Received int"
         ):
             gr.UploadButton(file_types=2)
 
@@ -1613,7 +1643,7 @@ class TestVideo:
         output2 = video_output.postprocess(y_vid_path)[0]["name"]
         assert output1 == output2
         assert (
-            video_output.postprocess(y_vid_path)[0]["orig_name"] == "video_sample.mp4"
+                video_output.postprocess(y_vid_path)[0]["orig_name"] == "video_sample.mp4"
         )
         output_with_subtitles = video_output.postprocess((y_vid_path, subtitles_path))
         assert output_with_subtitles[1]["data"].startswith("data")
@@ -1686,7 +1716,7 @@ class TestVideo:
         test_file_dir = Path(Path(__file__).parent, "test_files")
         # This file has a playable container but not playable codec
         with tempfile.NamedTemporaryFile(
-            suffix="bad_video.mp4", delete=False
+                suffix="bad_video.mp4", delete=False
         ) as tmp_not_playable_vid:
             bad_vid = str(test_file_dir / "bad_video_sample.mp4")
             assert not processing_utils.video_is_playable(bad_vid)
@@ -1696,7 +1726,7 @@ class TestVideo:
 
         # This file has a playable codec but not a playable container
         with tempfile.NamedTemporaryFile(
-            suffix="playable_but_bad_container.mkv", delete=False
+                suffix="playable_but_bad_container.mkv", delete=False
         ) as tmp_not_playable_vid:
             bad_vid = str(test_file_dir / "playable_but_bad_container.mkv")
             assert not processing_utils.video_is_playable(bad_vid)
@@ -2167,37 +2197,37 @@ class TestChatbot:
             [(Path("test/test_files/bus.png"), "A bus"), "cool pic"],
         ]
         processed_multimodal_msg = [
-            [
-                {
-                    "name": "video_sample.mp4",
-                    "mime_type": "video/mp4",
-                    "alt_text": None,
-                    "data": None,
-                    "is_file": True,
-                },
-                "cool video",
-            ],
-            [
-                {
-                    "name": "audio_sample.wav",
-                    "mime_type": "audio/wav",
-                    "alt_text": None,
-                    "data": None,
-                    "is_file": True,
-                },
-                "cool audio",
-            ],
-            [
-                {
-                    "name": "bus.png",
-                    "mime_type": "image/png",
-                    "alt_text": "A bus",
-                    "data": None,
-                    "is_file": True,
-                },
-                "cool pic",
-            ],
-        ] * 2
+                                       [
+                                           {
+                                               "name": "video_sample.mp4",
+                                               "mime_type": "video/mp4",
+                                               "alt_text": None,
+                                               "data": None,
+                                               "is_file": True,
+                                           },
+                                           "cool video",
+                                       ],
+                                       [
+                                           {
+                                               "name": "audio_sample.wav",
+                                               "mime_type": "audio/wav",
+                                               "alt_text": None,
+                                               "data": None,
+                                               "is_file": True,
+                                           },
+                                           "cool audio",
+                                       ],
+                                       [
+                                           {
+                                               "name": "bus.png",
+                                               "mime_type": "image/png",
+                                               "alt_text": "A bus",
+                                               "data": None,
+                                               "is_file": True,
+                                           },
+                                           "cool pic",
+                                       ],
+                                   ] * 2
         postprocessed_multimodal_msg = chatbot.postprocess(multimodal_msg)
         postprocessed_multimodal_msg_base_names = []
         for x, y in postprocessed_multimodal_msg:
@@ -2292,14 +2322,14 @@ class TestJSON:
             ["F", 30],
         ]
         assert (
-            await iface.process_api(
-                0, [{"data": y_data, "headers": ["gender", "age"]}], state={}
-            )
-        )["data"][0] == {
-            "M": 35,
-            "F": 25,
-            "O": 20,
-        }
+                   await iface.process_api(
+                       0, [{"data": y_data, "headers": ["gender", "age"]}], state={}
+                   )
+               )["data"][0] == {
+                   "M": 35,
+                   "F": 25,
+                   "O": 20,
+               }
 
 
 class TestHTML:
@@ -2759,13 +2789,13 @@ class TestScatterPlot:
 
     def test_update_errors(self):
         with pytest.raises(
-            ValueError, match="In order to update plot properties the value parameter"
+                ValueError, match="In order to update plot properties the value parameter"
         ):
             gr.ScatterPlot.update(x="foo", y="bar")
 
         with pytest.raises(
-            ValueError,
-            match="In order to update plot properties, the x and y axis data",
+                ValueError,
+                match="In order to update plot properties, the x and y axis data",
         ):
             gr.ScatterPlot.update(value=cars, x="foo")
 
@@ -2896,7 +2926,7 @@ class TestLinePlot:
             if layer["mark"]["type"] == "line":
                 assert layer["encoding"]["strokeDash"]["field"] == "symbol"
                 assert (
-                    layer["encoding"]["strokeDash"]["legend"]["title"] == "Stroke Dash"
+                        layer["encoding"]["strokeDash"]["legend"]["title"] == "Stroke Dash"
                 )
 
     def test_legend_position(self):
@@ -2945,13 +2975,13 @@ class TestLinePlot:
 
     def test_update_errors(self):
         with pytest.raises(
-            ValueError, match="In order to update plot properties the value parameter"
+                ValueError, match="In order to update plot properties the value parameter"
         ):
             gr.LinePlot.update(x="foo", y="bar")
 
         with pytest.raises(
-            ValueError,
-            match="In order to update plot properties, the x and y axis data",
+                ValueError,
+                match="In order to update plot properties, the x and y axis data",
         ):
             gr.LinePlot.update(value=stocks, x="foo")
 
@@ -3152,13 +3182,13 @@ class TestCode:
         assert code.preprocess("def fn(a):\n  return a") == "def fn(a):\n  return a"
 
         assert (
-            code.postprocess(
-                """
+                code.postprocess(
+                    """
             def fn(a):
                 return a
             """
-            )
-            == """def fn(a):
+                )
+                == """def fn(a):
                 return a"""
         )
 

@@ -2,10 +2,12 @@
 
 <script lang="ts">
 	import type { Gradio, SelectData } from "@gradio/utils";
-	import TextBox from "../shared";
+	import {TNOShapeBox} from "../shared";
 	import { Block } from "@gradio/atoms";
 	import { StatusTracker } from "@gradio/statustracker";
 	import type { LoadingStatus } from "@gradio/statustracker";
+	import {onMount} from "svelte";
+
 
 	export let gradio: Gradio<{
 		change: string;
@@ -15,12 +17,12 @@
 		input: never;
 		focus: never;
 	}>;
-	export let label = "Textbox";
+	export let label = "TNO Shape";
 	export let info: string | undefined = undefined;
 	export let elem_id = "";
 	export let elem_classes: string[] = [];
 	export let visible = true;
-	export let value = "";
+	export let value = {};
 	export let lines: number;
 	export let placeholder = "";
 	export let show_label: boolean;
@@ -36,6 +38,10 @@
 	export let text_align: "left" | "right" | undefined = undefined;
 	export let autofocus = false;
 	export let autoscroll = true;
+
+	onMount(() => {
+		gradio.dispatch('change', "123");
+	});
 </script>
 
 <Block
@@ -51,7 +57,7 @@
 		<StatusTracker {...loading_status} />
 	{/if}
 
-	<TextBox
+	<TNOShapeBox
 		bind:value
 		bind:value_is_output
 		{label}
@@ -67,7 +73,7 @@
 		{autofocus}
 		{container}
 		{autoscroll}
-		on:change={() => gradio.dispatch("change", value)}
+		on:change={(e) => gradio.dispatch('change', value)}
 		on:input={() => gradio.dispatch("input")}
 		on:submit={() => gradio.dispatch("submit")}
 		on:blur={() => gradio.dispatch("blur")}

@@ -1,1 +1,1 @@
-export { default } from "./TNOShape.svelte";
+export { default as TNOShapeBox } from "./TNOShape.svelte";
