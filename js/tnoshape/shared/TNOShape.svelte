@@ -122,7 +122,7 @@
 
 		maxStatesCount: 30,
 		baseCanvasWidth: 600,
-		backgroundColor: '#030d38',
+		backgroundColor: '#19212c',
 		guideColor: '#094f5e',
 		curveColor: '#32c5e3',
 		vertexColor: '#a11881',
